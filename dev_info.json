@@ -7,5 +7,11 @@
         "linkedIn": "https://www.linkedin.com/in/brybor-sh",
         "ig": "https://www.instagram.com/brybor.sh",
         "Website": "https://bryanborges.com"
+    },
+
+    "enterprice": {
+        "name": "ZONA_SH - Inovative Solutions",
+        "website": "https://zona-sh-portfolio.vercel.app/",
+        "email": "bryanborjes@outlook.com"
     }
 }

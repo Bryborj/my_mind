@@ -2,12 +2,15 @@
 import Link from "next/link";
 import info from "@/dev_info.json";
 const creatorInfo = info.creator;
+const enterprice = info.enterprice || {};
 
 const name = creatorInfo.name || "Z_SH";
 const githubUrl = creatorInfo.github || "https://github.com/";
 const twitterUrl = creatorInfo.twitter || "https://twitter.com/";
 const linkedinUrl = creatorInfo.linkedIn || "https://linkedin.com/";
 const facebookUrl = creatorInfo.facebook || "https://facebook.com/";
+const enterpriceName = enterprice.name || "Z_SH";
+const enterpricewebsiteUrl = enterprice.website || "#";
 
 export default function Footer() {
   return (
@@ -22,7 +25,12 @@ export default function Footer() {
         <Link href={facebookUrl} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">Facebook</Link>
       </div>
       <div>
-        <span className="text-xs">© {new Date().getFullYear()} Z_SH. Todos los derechos reservados.</span>
+        <span className="text-xs">
+          © {new Date().getFullYear()} <Link href={enterpricewebsiteUrl} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">
+            {enterpriceName}.
+          </Link>
+          Todos los derechos reservados.
+        </span>
       </div>
     </footer>
   );
