@@ -8,6 +8,8 @@ const HabitSchema = new mongoose.Schema({
   frequency: { type: String }, // diaria, semanal, etc.
   createdAt: { type: Date, default: Date.now },
   completedDates: { type: [String], default: [] }, // array de fechas completadas en formato 'YYYY-MM-DD'
+  deleted: { type: Boolean, default: false },
+  deletedAt: { type: Date },
 });
 
 export default mongoose.models.Habit || mongoose.model("Habit", HabitSchema);

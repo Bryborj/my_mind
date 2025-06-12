@@ -10,7 +10,8 @@ export default async function handler(req, res) {
     await connectToDatabase();
 
     if (req.method === "GET") {
-      const habits = await Habit.find({ userId });
+      // Solo hábitos no eliminados
+      const habits = await Habit.find({ userId, deleted: { $ne: true } });
       return res.status(200).json(habits);
     }
 
@@ -38,6 +39,19 @@ export default async function handler(req, res) {
         console.error("Error al guardar el hábito:", error);
         return res.status(500).json({ error: "Error al guardar el hábito" });
       }
+    }
+
+    if (req.method === "DELETE") {
+      // Eliminar (enviar a papelera) uno o varios hábitos
+      const { ids } = req.body; // array de ids
+      if (!ids || !Array.isArray(ids)) {
+        return res.status(400).json({ error: "Se requiere un array de ids" });
+      }
+      await Habit.updateMany(
+        { _id: { $in: ids }, userId },
+        { $set: { deleted: true, deletedAt: new Date() } }
+      );
+      return res.status(200).json({ message: "Hábitos enviados a la papelera" });
     }
 
     return res.status(405).json({ error: "Método no permitido" });
